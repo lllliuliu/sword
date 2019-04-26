@@ -1,0 +1,13 @@
+[server]
+Debug=true
+Mode = "release"
+Port = 8777
+DefaultReadTimeOut = 10
+DefaultWriteTimeOut = 10
+DefaultMaxHeaderBytes = 20
+AccessLog = "logs/access.log"
+
+
+[db]
+Driver = "sqlite3"
+DB = "data/20190403.db"
