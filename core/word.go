@@ -53,7 +53,7 @@ func FetchWords() ([]map[string]string, error) {
 	for _, w := range getCheckWords() {
 		rs = append(rs, map[string]string{
 			"class": mapclass[w.ClassID],
-			"name":  w.Name,
+			"word":  w.Name,
 		})
 	}
 	return rs, nil

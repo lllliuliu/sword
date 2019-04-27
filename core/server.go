@@ -37,9 +37,9 @@ func ServerStart() {
 	rv100 := router.Group("/v1.0.0")
 	{
 		// 获取原始词库，JSON格式
+		rv100.GET("/origin_words", originWordsHandler)
+		// 获取所有敏感词集合，JSON格式
 		rv100.GET("/words", wordsHandler)
-		// 获取所有需要检查的词库，JSON格式
-		rv100.GET("/check_words", checkWordsHandler)
 		// 检查所传输的内容
 		rv100.POST("/check", checkHandler)
 	}
@@ -60,14 +60,14 @@ func buildAC() *cedar.Matcher{
 	return m
 }
 
-// wordsReq 词库处理参数
-type wordsReq struct {
+// owReq 原始词库处理参数
+type owReq struct {
 	Wtype int `form:"type" json:"type"`
 }
 
-// wordsHandler 获取词库，JSON格式
-func wordsHandler(c *gin.Context) {
-	var query wordsReq
+// originWordsHandler 获取原始词库，JSON格式
+func originWordsHandler(c *gin.Context) {
+	var query owReq
 	if err := c.ShouldBindQuery(&query); err != nil {
 		respError(http.StatusBadRequest, err, c)
 		return
@@ -81,13 +81,13 @@ func wordsHandler(c *gin.Context) {
 	})
 }
 
-// checkWordsHandler 获取所有需要检查的词库，JSON格式
-func checkWordsHandler(c *gin.Context) {
+// wordsHandler 获取所有需要检查的词库，JSON格式
+func wordsHandler(c *gin.Context) {
 	var rs []map[string]string
 	for _, w := range getCheckWords() {
 		rs = append(rs, map[string]string{
 			"class": MapClasses[w.ClassID],
-			"name": w.Name,
+			"word": w.Name,
 		})
 	}
 	c.JSON(http.StatusOK, gin.H{

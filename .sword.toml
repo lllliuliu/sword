@@ -9,5 +9,7 @@ AccessLog = "logs/access.log"
 
 
 [db]
-Driver = "sqlite3"
+# 驱动类型，目前只支持sqlite
+Driver = "sqlite3" 
+# 生成的数据库文件地址，默认在/data目录
 DB = "data/20190403.db"
