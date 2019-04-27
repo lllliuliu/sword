@@ -5,12 +5,13 @@
 使用Golang 1.12.1+开发，基于 sqlite 数据库，因为使用了 cgo，所以暂时不支持交叉编译，在不同的系统上本地编译即可使用。
 ```
 # window 系统编译
-CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o sword.exe
+go build -o sword.exe
 
 # linux 系统编译
 CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o sword
 ```
-暂不将编译好的文件放入仓库，后续会找到一个 release 的地点发布。
+
+可以直接下载编译好的工具，[点击下载](https://github.com/lllliuliu/sword/releases/tag/v1.0.0)
 
 ## 使用说明
 首先，工具包含一个全局参数 `-c` 或者 `--config`，在使用任何子命令的时候都可以使用这个参数指定配置文件，默认使用当前目录下的 **.sword.toml**，一般修改这个文件即可。
