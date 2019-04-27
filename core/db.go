@@ -24,7 +24,7 @@ func initDB() error {
 	paths, _ := filepath.Split(dbfile)
 	err = os.MkdirAll(paths, 0755)
 	if err != nil {
-		panic("数据库目录创建失败")
+		panic(err)
 	}
 
 	db, err := gorm.Open(Conf.Get("db.Driver"), dbfile)
